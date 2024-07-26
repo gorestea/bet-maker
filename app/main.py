@@ -1,15 +1,7 @@
-import logging
-
 from fastapi import FastAPI
 from app.api import router
 from app.db import init_db
 
-logging.basicConfig(
-    level=logging.DEBUG,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[logging.StreamHandler()]
-)
-logger = logging.getLogger(__name__)
 
 app = FastAPI()
 

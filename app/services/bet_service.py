@@ -36,7 +36,7 @@ class BetService:
         new_bet = Bet(
             event_id=bet_data.event_id,
             amount=bet_data.amount,
-            status=BetStatus.not_played,  # статус "ещё не сыграла"
+            status=BetStatus.not_played,
             created_at=datetime.utcnow()
         )
         db.add(new_bet)
@@ -56,7 +56,6 @@ class BetService:
                     response = await client.get(f"http://line-provider:8000/events/{bet.event_id}")
                     event_data = response.json()
 
-                    # Определение статуса ставки на основе статуса события
                     if event_data["status"] == "незавершённое":
                         result_text = "ещё не сыграла"
                         bet.status = BetStatus.not_played
@@ -66,8 +65,6 @@ class BetService:
                     else:
                         result_text = "проиграла"
                         bet.status = BetStatus.lost
-
-                    # Обновление статуса в базе данных
 
                     bet_responses.append(BetResponse.from_orm(bet).copy(update={"result": result_text}))
 

@@ -3,10 +3,12 @@ from enum import Enum
 from datetime import datetime
 from typing import Optional
 
+
 class BetStatus(str, Enum):
     not_played = "ещё не сыграла"
     won = "выиграла"
     lost = "проиграла"
+
 
 class BetCreate(BaseModel):
     event_id: int
@@ -19,6 +21,7 @@ class BetCreate(BaseModel):
                 "amount": 100.00
             }
         }
+
 
 class BetResponse(BaseModel):
     id: int
@@ -41,6 +44,7 @@ class BetResponse(BaseModel):
                 "result": "неизвестно"
             }
         }
+
 
 class EventResponse(BaseModel):
     id: int
